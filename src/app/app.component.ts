@@ -7,11 +7,14 @@ import { Component, signal, computed, effect } from '@angular/core';
   template: `
     <h1 class="centerText">Hello, {{ title }}</h1>
     <div class="demoArea">
-      <p>Count: {{ count() }}</p>
-      <p>Double Count: {{ doubleCount() }}</p>
+      <p>Count: <span class="numericDisplay">{{ count() }}</span></p>
+      <p>Double Count: <span class="numericDisplay">{{ doubleCount() }}</span></p>
       <button class="leftButton" (click)="decrement()">Decrement</button>
       <button class="rightButton" (click)="increment()">Increment</button>
     </div>
+
+    <h2 class="centerText">Logging Area</h2>
+    <div id="logBox" class="logArea"></div>
   `,
   styles: `
     .centerText {
@@ -34,6 +37,18 @@ import { Component, signal, computed, effect } from '@angular/core';
       position: relative;
       left: 2rem;
     }
+
+    .logArea {
+      border: solid .15rem darkgreen;
+      background: black;
+      color: lightgreen;
+      padding: .4rem;
+      width: 35rem;
+      margin: 1rem auto;
+      font-family: "DM Mono", monospace;
+      max-height: 30rem;
+      overflow: auto;
+    }
   `
 })
 export class AppComponent {
@@ -48,8 +63,17 @@ export class AppComponent {
   constructor() {
     // Create an effect
     effect(() => {
-      console.log(`Count is: ${this.count()}`);
+      const textToLog = `Count is: ${this.count()}`;
+      console.log(textToLog);
+      this.logToLogBox(textToLog);
     });
+  }
+
+  logToLogBox(logEntry: string) {
+    const logBox = document.getElementById('logBox');
+      if(logBox) {
+        logBox.innerHTML += `${logEntry}<br/>`;
+      }
   }
 
   increment() {
