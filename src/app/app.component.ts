@@ -5,7 +5,8 @@ import { Component, signal, computed, effect } from '@angular/core';
   selector: 'app-root',
   standalone: true,
   template: `
-    <div class="centered">
+    <h1 class="centerText">Hello, {{ title }}</h1>
+    <div class="demoArea">
       <p>Count: {{ count() }}</p>
       <p>Double Count: {{ doubleCount() }}</p>
       <button class="leftButton" (click)="decrement()">Decrement</button>
@@ -13,11 +14,15 @@ import { Component, signal, computed, effect } from '@angular/core';
     </div>
   `,
   styles: `
-    .centered {
+    .centerText {
+      text-align: center;
+    }
+
+    .demoArea {
       border: solid .1rem black;
       padding: 0 0 .5rem .8rem;
       width: 15rem;
-      margin: 5rem auto;
+      margin: 2rem auto;
     }
 
     .leftButton {
@@ -32,7 +37,7 @@ import { Component, signal, computed, effect } from '@angular/core';
   `
 })
 export class AppComponent {
-  title = 'test-angular-signals-app';
+  title = 'simple-signals-demo';
 
   // Create a signal
   count = signal(0);
