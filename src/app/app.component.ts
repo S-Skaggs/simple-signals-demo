@@ -39,6 +39,8 @@ import { Component, signal, computed, effect } from '@angular/core';
     }
 
     .logArea {
+      display: flex;
+      flex-direction: column-reverse;
       border: solid .15rem darkgreen;
       background: black;
       color: lightgreen;
